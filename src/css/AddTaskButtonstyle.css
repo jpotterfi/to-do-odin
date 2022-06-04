@@ -1,0 +1,7 @@
+#addTaskButton {
+    align-self: flex-end;
+    height: 100px;
+    width: 100px;
+    background-image: url("plus-circle.svg");
+    background-size: contain;
+}

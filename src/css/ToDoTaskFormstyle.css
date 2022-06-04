@@ -1,0 +1,134 @@
+.form {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	min-width: fit-content;
+	width: 75%;
+	border: white 2px solid;
+	border-radius: 16px;
+	padding: 8px;
+	font-size: 20px;
+	color: white;
+	font-family: 'Roboto';
+	background-color: black;
+	min-height: fit-content;
+}
+
+.switch-field {
+	display: flex;
+	overflow: hidden;
+    justify-content: center;
+	align-items: center;
+	gap: 12px;
+}
+
+.switch-field input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+
+.switch-field label {
+	background-color: #e4e4e4;
+	color: rgba(0, 0, 0, 0.6);
+    height: 20px;
+    width: 20px;
+	font-size: 14px;
+	line-height: 1;
+	text-align: center;
+	
+	transition: all 0.1s ease-in-out;
+	margin-top: 5px;
+}
+
+.switch-field label:hover {
+	cursor: pointer;
+}
+
+#greenButton {
+    background-color: #11FA50;
+	border: 3px #11FA50 solid;
+}
+
+#priorityGreen:checked + label {
+	box-shadow: none;
+	border: 3px white solid;
+}
+
+#orangeButton {
+    background-color: #FAC405;
+	border: 3px #FAC405 solid;
+}
+
+#priorityOrange:checked + label {
+	box-shadow: none;
+	border: 3px white solid;
+}
+
+#redButton {
+    background-color: #FA373C;
+	border: 3px #FA373C solid;
+}
+
+#priorityRed:checked + label {
+	box-shadow: none;
+	border: 3px white solid;
+	
+}
+
+#confirmButton {
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+	background-image: url("check-circle.svg");
+	background-size:contain;
+	border-radius: none;
+}
+
+#confirmBox {
+	display: flex;
+	flex-direction: row;
+	gap: 24px;
+}
+
+#denyButton {
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+	background-image: url("close-circle.svg");
+	background-size:contain;
+}
+
+#taskBox, #priorityBox, #dateBox {
+	display: flex;
+	flex-direction: column;
+}
+
+#priorityBox {
+}
+
+#taskBox, #priorityBox, #dateBox, #confirmBox {
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+#taskHeading, #priorityHeading, #dateHeading {
+	font-size: 16px;
+}
+
+#confirmButton:hover {
+	cursor: pointer;
+	border-color: #69b34c;
+}
+
+#taskInput {
+	background-color: rgba(0, 0, 0, 0.1);
+	border: white 2px solid;
+	color: white;
+	outline: none;
+	
+}
