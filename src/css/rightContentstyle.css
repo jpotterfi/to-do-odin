@@ -52,3 +52,34 @@
     border: 2px solid;
 }
 
+#folderBox {
+    width: 99%;
+    order: -1;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+#folderBoxHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+#folderHeader {
+    font-size: 50px;
+}
+
+#timeHeaderContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#sortBox {
+    align-self: flex-end;
+}

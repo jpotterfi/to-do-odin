@@ -2,6 +2,7 @@ let currentFolder = "inbox";
 
 function setFolder(newFolder) {
     currentFolder = newFolder;
+    console.log("set folder to" + newFolder);
 }
 
 function getFolder(){
