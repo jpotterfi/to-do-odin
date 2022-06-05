@@ -5,7 +5,7 @@ function createAddTaskButton() {
     addTaskButton.id = "addTaskButton";
 
     addTaskButton.addEventListener("click", function (){
-        rightContent.innerHTML = "";
+        addTaskButton.remove();
         createToDoTaskForm();
     });
 

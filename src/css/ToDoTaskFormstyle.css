@@ -4,10 +4,8 @@
 	justify-content: space-between;
 	align-items: center;
 	min-width: fit-content;
-	width: 75%;
+	width: 98.6%;
 	border: white 2px solid;
-	border-radius: 16px;
-	padding: 8px;
 	font-size: 20px;
 	color: white;
 	font-family: 'Roboto';
@@ -17,9 +15,8 @@
 
 .switch-field {
 	display: flex;
+	flex-direction: row;
 	overflow: hidden;
-    justify-content: center;
-	align-items: center;
 	gap: 12px;
 }
 
@@ -42,7 +39,7 @@
 	text-align: center;
 	
 	transition: all 0.1s ease-in-out;
-	margin-top: 5px;
+	
 }
 
 .switch-field label:hover {
@@ -103,15 +100,14 @@
 	background-size:contain;
 }
 
-#taskBox, #priorityBox, #dateBox {
+#taskBox, .switch-field #dateBox {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 }
 
-#priorityBox {
-}
 
-#taskBox, #priorityBox, #dateBox, #confirmBox {
+#taskBox, #dateBox, #confirmBox {
 	padding-left: 8px;
 	padding-right: 8px;
 }
@@ -127,8 +123,7 @@
 
 #taskInput {
 	background-color: rgba(0, 0, 0, 0.1);
-	border: white 2px solid;
+	border: white 1px solid;
 	color: white;
 	outline: none;
-	
 }

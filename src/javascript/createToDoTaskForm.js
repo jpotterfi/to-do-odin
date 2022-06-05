@@ -1,3 +1,7 @@
+import { createAddTaskButton } from "./createAddTaskButton";
+import { renderProjectPage } from "./renderProjects";
+import { getFolder } from "./setFolder";
+
 function createToDoTaskForm(){
     let formTemplate = document.createElement("div");
     formTemplate.className = "formTemplate";
@@ -8,9 +12,9 @@ function createToDoTaskForm(){
     ///task Box
     let taskBox = document.createElement("div");
     taskBox.id = "taskBox";
-    let taskHeading = document.createElement("div");
-    taskHeading.id = "taskHeading";
-    taskHeading.innerHTML = "Task Name";
+    //let taskHeading = document.createElement("div");
+    //taskHeading.id = "taskHeading";
+    //taskHeading.innerHTML = "Task Name";
     let taskField = document.createElement("div");
     taskField.id = "taskField";
     let taskInputLabel = document.createElement("label");
@@ -19,11 +23,12 @@ function createToDoTaskForm(){
     taskInput.type = "text";
     taskInput.id = "taskInput";
     taskInput.name = "taskInput";
+    taskInput.placeholder = "Task Name";
 
     taskField.appendChild(taskInputLabel);
     taskField.appendChild(taskInput);
 
-    taskBox.appendChild(taskHeading);
+    //taskBox.appendChild(taskHeading);
     taskBox.appendChild(taskField);
 
     form.appendChild(taskBox);
@@ -31,11 +36,11 @@ function createToDoTaskForm(){
     ///task Box
 
     ///priority Box
-    let priorityBox = document.createElement("div");
-    priorityBox.id = "priorityBox";
-    let priorityHeading = document.createElement("div");
-    priorityHeading.id = "priorityHeading";
-    priorityHeading.innerHTML = "Priority";
+    //let priorityBox = document.createElement("div");
+    //priorityBox.id = "priorityBox";
+    //let priorityHeading = document.createElement("div");
+    //priorityHeading.id = "priorityHeading";
+    //priorityHeading.innerHTML = "Priority";
     let switchField = document.createElement("div");
     switchField.className = "switch-field";
 
@@ -88,19 +93,18 @@ function createToDoTaskForm(){
     switchField.appendChild(priorityRedInput);
     switchField.appendChild(priorityRedLabel);
 
-    priorityBox.appendChild(priorityHeading);
-    priorityBox.appendChild(switchField);
+    //priorityBox.appendChild(priorityHeading);
 
-    form.appendChild(priorityBox);
+    form.appendChild(switchField);
 
     ///priority Box
 
     ///date Box
     let dateBox = document.createElement("div");
     dateBox.id = "dateBox";
-    let dateHeading = document.createElement("div");
-    dateHeading.id = "dateHeading";
-    dateHeading.innerHTML = "Due Date";
+    //let dateHeading = document.createElement("div");
+    //dateHeading.id = "dateHeading";
+    //dateHeading.innerHTML = "Due Date";
     let dateField = document.createElement("div");
     dateField.id = "dateField";
     let dateInput = document.createElement("input");
@@ -113,7 +117,7 @@ function createToDoTaskForm(){
 
     dateField.appendChild(dateInput);
 
-    dateBox.appendChild(dateHeading);
+    //dateBox.appendChild(dateHeading);
     dateBox.appendChild(dateField);
 
     form.appendChild(dateBox);
@@ -129,6 +133,12 @@ function createToDoTaskForm(){
     let denyButton = document.createElement("div");
     denyButton.id = "denyButton";
     denyButton.type = "button";
+
+    //denyButton event listener
+    denyButton.addEventListener("click", function(){
+        form.remove();
+        createAddTaskButton();
+    });
 
     ///confirmBox event listener
     confirmButton.addEventListener("click", function(){
@@ -150,7 +160,7 @@ function createToDoTaskForm(){
             return {type, folder, task, priority, date, position, isCompleted};
           }
 
-        let task = taskFactory("task", "inbox", taskData, priorityData, dateData, localStorage.length);
+        let task = taskFactory("task", getFolder(), taskData, priorityData, dateData, localStorage.length);
 
         task = JSON.stringify(task);
 
@@ -159,6 +169,7 @@ function createToDoTaskForm(){
         console.log(JSON.parse(localStorage.getItem(localStorage.length - 1)))
 
         rightContent.removeChild(form);
+        renderProjectPage(getFolder());
 
     });
 

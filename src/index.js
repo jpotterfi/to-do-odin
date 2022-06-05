@@ -2,6 +2,7 @@ import './css/style.css';
 import './css/ToDoTaskFormstyle.css'
 import './css/AddTaskButtonstyle.css'
 import './css/projectModal.css'
+import './css/rightContentstyle.css'
 
 
 
@@ -15,9 +16,10 @@ let inboxFolder = document.getElementById("inboxHeader");
 inboxFolder.addEventListener("click", function(){
     setFolder("inbox");
     console.log("current folder is " + getFolder());
+    renderProjectPage("inbox");
 });
 
-createAddTaskButton();
+//createAddTaskButton();
 createNewProject();
 renderProjectHeadings();
 renderProjectPage("inbox");

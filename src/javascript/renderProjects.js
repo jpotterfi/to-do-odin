@@ -1,6 +1,11 @@
 import { localStorageToProjectArray, localStorageToTaskArray } from './localStorageToArray'
 import { setFolder, getFolder } from './setFolder'
 import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { createAddTaskButton } from './createAddTaskButton';
+import startOfToday from 'date-fns/startOfToday';
+import parseISO from 'date-fns/parseISO';
+
+
 
 
     function renderProjectHeadings (){
@@ -27,30 +32,34 @@ import { format, formatDistance, formatRelative, subDays } from 'date-fns'
         let folderName = folder;
         let rightContent = document.getElementById("right-content");
          function clearRightContent() {
-             rightContent.innerHTML = "";
+             let taskListing = document.getElementById("taskListing");
+             taskListing.innerHTML = "";
+             //let addTaskButton = document.getElementById("addTaskButton");
+             //addTaskButton.remove();
          }
      
          function createFolderHeader(){
-         let folderHeader = document.createElement("div");
-         folderHeader.id = "folderHeader";
+         let folderHeader = document.getElementById("folderHeader")
          folderHeader.innerHTML = folderName;
-         rightContent.appendChild(folderHeader);
         }
 
         function renderTasksToFolder() {
             let tasksArray = localStorageToTaskArray();
-            let taskListing = document.createElement("div");
-            taskListing.id = "taskListing";
+            let taskListing = document.getElementById("taskListing");
+            let currentDate = startOfToday();
+            console.log(currentDate);
+            
             for (let i = 0; i < tasksArray.length; i ++){
                 let taskName = tasksArray[i].task;
                 let taskPriority = tasksArray[i].priority;
-                let taskDate = tasksArray[i].date;
+                let taskDate = parseISO(tasksArray[i].date);
                 let taskFolder = tasksArray[i].folder;
                 let taskPosition = tasksArray[i].position;
                 let taskIsCompleted = tasksArray[i].isCompleted;
 
-                if (taskFolder == folderName){ 
-                    
+                if ((taskFolder == folderName) || (folderName == "inbox")){ 
+                console.log("went thru");
+
                 let taskListingBox = document.createElement("div");
                 taskListingBox.className = "taskListingBox";
 
@@ -78,7 +87,11 @@ import { format, formatDistance, formatRelative, subDays } from 'date-fns'
                 taskListingRightContainer.className = "taskListingRightContainer";
                 let taskListingDueTime = document.createElement("div");
                 taskListingDueTime.className = "taskListingDueTime";
-                taskListingDueTime.innerHTML = formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: true });
+                taskListingDueTime.innerHTML = formatDistance(
+                    taskDate,
+                    currentDate,
+                    { addSuffix: true }
+                  )
 
                 let taskListingDelete = document.createElement("div");
                 taskListingDelete.className = "taskListingDelete";
@@ -103,11 +116,18 @@ import { format, formatDistance, formatRelative, subDays } from 'date-fns'
                 taskListing.appendChild(taskListingBox);
                 } //end of if statement
             } //end of loop
-            rightContent.appendChild(taskListing);
+            
         }//end of renderTasksToFolder
         clearRightContent();
         createFolderHeader();
         renderTasksToFolder();
+        let addTaskButton = document.getElementById("addTaskButton");
+        if (typeof(addTaskButton) != 'undefined' && addTaskButton != null)
+        {
+            return
+        } else {
+            createAddTaskButton();
+        }   
 
     }//end of renderProjectPage
     

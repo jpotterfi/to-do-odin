@@ -82,12 +82,3 @@ html,body {
 }
 
 
-#right-content{
-    grid-area: rightContent;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: black;
-    padding-top: 20px;
-}
