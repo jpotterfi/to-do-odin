@@ -45,6 +45,12 @@
     gap: 8px;
 }
 
+.taskListingRightContainer {
+    justify-content: space-between;
+    width: 20%;
+    padding-right: 8px;
+}
+
 .taskListingIsCompleted {
     width: 25px;
     height: 25px;

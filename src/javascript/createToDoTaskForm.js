@@ -149,18 +149,18 @@ function createToDoTaskForm(){
         console.log(taskData, priorityData, dateData);
 
         const taskFactory = (type, folder, task, priority, date, position, isCompleted) => {
-            this.type =  type;
-            this.folder = folder;
-            this.task = task;
-            this.priority = priority;
-            this.date = date;
-            this.position = position;
-            this.isCompleted = false;
+            type =  type;
+            folder = folder;
+            task = task;
+            priority = priority;
+            date = date;
+            position = position;
+            isCompleted = isCompleted
 
             return {type, folder, task, priority, date, position, isCompleted};
           }
 
-        let task = taskFactory("task", getFolder(), taskData, priorityData, dateData, localStorage.length);
+        let task = taskFactory("task", getFolder(), taskData, priorityData, dateData, localStorage.length, false);
 
         task = JSON.stringify(task);
 

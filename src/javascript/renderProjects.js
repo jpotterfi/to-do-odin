@@ -1,7 +1,8 @@
-import { localStorageToProjectArray, localStorageToTaskArray } from './localStorageToArray'
+import { localStorageToCombinedArray, localStorageToProjectArray, localStorageToTaskArray } from './localStorageToArray'
 import { setFolder, getFolder } from './setFolder'
 import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 import { createAddTaskButton } from './createAddTaskButton';
+import { writeToLocalStorage } from './writeToLocalStorage';
 import startOfToday from 'date-fns/startOfToday';
 import parseISO from 'date-fns/parseISO';
 
@@ -110,82 +111,117 @@ import parseISO from 'date-fns/parseISO';
         function renderTasksToFolder() {
             let tasksArray = localStorageToTaskArray();
             let taskListing = document.getElementById("taskListing");
+            let combinedArray = localStorageToCombinedArray();
+            console.log(combinedArray);
             let currentDate = startOfToday();
             console.log(currentDate);
             
-            for (let i = 0; i < tasksArray.length; i ++){
-                let taskName = tasksArray[i].task;
-                let taskPriority = tasksArray[i].priority;
-                let taskDate = parseISO(tasksArray[i].date);
-                let taskFolder = tasksArray[i].folder;
-                let taskPosition = tasksArray[i].position;
-                let taskIsCompleted = tasksArray[i].isCompleted;
+            for (let i = 0; i < combinedArray.length; i ++){
+                if (combinedArray[i].type == "task") {
+                    let taskName = combinedArray[i].task;
+                    let taskPriority = combinedArray[i].priority;
+                    let taskDate = parseISO(combinedArray[i].date);
+                    let taskFolder = combinedArray[i].folder;
+                    let taskPosition = combinedArray[i].position;
+                    let taskIsCompleted = combinedArray[i].isCompleted;
 
-                if ((taskFolder == folderName) || (folderName == "Inbox")){ 
-                console.log("went thru");
+                    if ((taskFolder == folderName) || (folderName == "Inbox")){ 
+                    console.log("went thru");
 
-                let taskListingBox = document.createElement("div");
-                taskListingBox.className = "taskListingBox";
-                taskListingBox.id = "taskListingBox" + taskPosition; 
+                    let taskListingBox = document.createElement("div");
+                    taskListingBox.className = "taskListingBox";
+                    taskListingBox.id = "taskListingBox" + taskPosition; 
 
-                let taskListingLeftContainer = document.createElement("div");
-                taskListingLeftContainer.className = "taskListingLeftContainer";
-                let taskListingIsCompleted = document.createElement("div");
-                taskListingIsCompleted.className = "taskListingIsCompleted";
+                    let taskListingLeftContainer = document.createElement("div");
+                    taskListingLeftContainer.className = "taskListingLeftContainer";
+                    let taskListingIsCompleted = document.createElement("div");
+                    taskListingIsCompleted.className = "taskListingIsCompleted";
+                    taskListingIsCompleted.id = taskPosition;
+                    console.log("task position in combined array is" + taskPosition);
+                    console.table(combinedArray);
 
-                let taskListingName = document.createElement("div");
-                taskListingName.className = "taskListingName";
-                taskListingName.innerHTML = taskName;
 
-                let taskListingFolder = document.createElement("div");
-                taskListingFolder.className = "taskListingFolder";
-                taskListingFolder.innerHTML = "(" + taskFolder + ")"; 
+                    //event listener for IsCompleted
+                    taskListingIsCompleted.addEventListener("click", function(){
+                        combinedArray[taskListingIsCompleted.id].changeCompletion();
+                        writeToLocalStorage(combinedArray);
+                        renderProjectPage(getFolder());
+                    })
 
-                if (taskIsCompleted){
-                    taskListingIsCompleted.borderColor = "green";
+
+
+
+
+                    //event listener for IsCompleted
+
+                    let taskListingName = document.createElement("div");
+                    taskListingName.className = "taskListingName";
+                    taskListingName.innerHTML = taskName;
+                    taskListingName.id = taskPosition;
+
+                    let taskListingFolder = document.createElement("div");
+                    taskListingFolder.className = "taskListingFolder";
+                    taskListingFolder.innerHTML = "(" + taskFolder + ")"; 
+
+                    if (taskIsCompleted == true){
+                        taskListingIsCompleted.style.borderColor = "white";
+                        taskListingIsCompleted.style.backgroundColor = "white";
+                    }
+
+                    if (taskIsCompleted == false){
+                        taskListingIsCompleted.style.borderColor = "white"
+                        
+                    }
+
+                    taskListingLeftContainer.appendChild(taskListingIsCompleted);
+                    taskListingLeftContainer.appendChild(taskListingName);
+                    taskListingLeftContainer.appendChild(taskListingFolder);
+
+                    let taskListingRightContainer = document.createElement("div");
+                    taskListingRightContainer.className = "taskListingRightContainer";
+                    let taskListingDueTime = document.createElement("div");
+                    taskListingDueTime.className = "taskListingDueTime";
+                    taskListingDueTime.innerHTML = formatDistance(
+                        taskDate,
+                        currentDate,
+                        { addSuffix: true }
+                    )
+
+                    let taskListingDelete = document.createElement("div");
+                    taskListingDelete.className = "taskListingDelete";
+                    taskListingDelete.id = taskPosition;
+                    taskListingDelete.innerHTML = "X";
+
+                    //delete eventlistener
+                    taskListingDelete.addEventListener("click", function(){
+                    let deleteForm = document.getElementById("taskListingBox" + taskListingDelete.id);
+                    deleteForm.remove();
+                    localStorage.removeItem(taskListingDelete.id);
+                    renderProjectPage(getFolder());
+                    });
+
+
+                    ///delete eventlistener
+
+                    taskListingRightContainer.appendChild(taskListingDueTime);
+                    taskListingRightContainer.appendChild(taskListingDelete);
+
+                    taskListingBox.appendChild(taskListingLeftContainer);
+                    taskListingBox.appendChild(taskListingRightContainer);
+
+                    if (taskPriority == "green"){
+                        taskListingBox.style.borderColor = "green";    
+                    }
+                    if (taskPriority == "orange"){
+                        taskListingBox.style.borderColor = "orange";    
+                    }
+                    if (taskPriority == "red"){
+                        taskListingBox.style.borderColor = "red"
+                    }
+
+                    taskListing.appendChild(taskListingBox);
+                    } //end of if statement
                 }
-
-                if (!taskIsCompleted){
-                    taskListingIsCompleted.borderColor = "red";
-                }
-
-                taskListingLeftContainer.appendChild(taskListingIsCompleted);
-                taskListingLeftContainer.appendChild(taskListingName);
-                taskListingLeftContainer.appendChild(taskListingFolder);
-
-                let taskListingRightContainer = document.createElement("div");
-                taskListingRightContainer.className = "taskListingRightContainer";
-                let taskListingDueTime = document.createElement("div");
-                taskListingDueTime.className = "taskListingDueTime";
-                taskListingDueTime.innerHTML = formatDistance(
-                    taskDate,
-                    currentDate,
-                    { addSuffix: true }
-                  )
-
-                let taskListingDelete = document.createElement("div");
-                taskListingDelete.className = "taskListingDelete";
-                taskListingDelete.id = taskPosition;
-                taskListingDelete.innerHTML = "X";
-
-                taskListingRightContainer.appendChild(taskListingDueTime);
-                taskListingRightContainer.appendChild(taskListingDelete);
-
-                taskListingBox.appendChild(taskListingLeftContainer);
-                taskListingBox.appendChild(taskListingRightContainer);
-
-                if (taskPriority == "green"){
-                    taskListingBox.style.borderColor = "green";    
-                }
-                if (taskPriority == "orange"){
-                    taskListingBox.style.borderColor = "orange";    
-                }
-                if (taskPriority == "red"){
-                    taskListingBox.style.borderColor = "red"
-                }
-
-                taskListing.appendChild(taskListingBox);
-                } //end of if statement
             } //end of loop
             
         }//end of renderTasksToFolder

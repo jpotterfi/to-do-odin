@@ -1,4 +1,4 @@
-let currentFolder = "inbox";
+let currentFolder = "Inbox";
 
 function setFolder(newFolder) {
     currentFolder = newFolder;
