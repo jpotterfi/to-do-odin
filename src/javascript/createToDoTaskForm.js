@@ -1,6 +1,8 @@
+import { startOfToday, formatISO } from "date-fns";
 import { createAddTaskButton } from "./createAddTaskButton";
 import { renderProjectPage } from "./renderProjects";
 import { getFolder } from "./setFolder";
+import isValid from 'date-fns/isValid';
 
 function createToDoTaskForm(){
     let formTemplate = document.createElement("div");
@@ -108,10 +110,14 @@ function createToDoTaskForm(){
     let dateField = document.createElement("div");
     dateField.id = "dateField";
     let dateInput = document.createElement("input");
+    let today = startOfToday();
+    let ISOToday = formatISO(today, { representation: 'date' })
+    console.log(ISOToday);
+
     dateInput.type = "date";
     dateInput.id = "dateInput";
     dateInput.name = "dateInput";
-    dateInput.value = "2022-05-30";
+    dateInput.value = ISOToday; //"2022-05-30"
     dateInput.min = "2022-05=30";
     dateInput.max = "2025-12-31";
 
@@ -145,6 +151,11 @@ function createToDoTaskForm(){
         let taskData = taskInput.value;
         let priorityData = prioritySelection;
         let dateData = dateInput.value;
+        console.log("dateData is " + dateData)
+        console.log(isValid(dateData))
+        if (isValid(dateData) === false){
+            dateData = ISOToday;
+        }
 
         console.log(taskData, priorityData, dateData);
 

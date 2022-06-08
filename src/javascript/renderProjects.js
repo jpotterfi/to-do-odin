@@ -6,6 +6,7 @@ import { writeToLocalStorage } from './writeToLocalStorage';
 import startOfToday from 'date-fns/startOfToday';
 import parseISO from 'date-fns/parseISO';
 import { createEditFolderInputField, createEditTaskNameInputField, createEditDateInputField } from './createEditInputField';
+import { deleteFromLocalStorage } from './deleteFromLocalStorage';
 
 
 
@@ -210,7 +211,6 @@ import { createEditFolderInputField, createEditTaskNameInputField, createEditDat
                     //event listner for taskListingDueTime
                     taskListingDueTime.addEventListener("click", function(){
                         let storedPosition = taskPosition;
-                        let storedDate = taskDate;
                         createEditDateInputField(storedPosition);  
                     });
 
@@ -224,9 +224,10 @@ import { createEditFolderInputField, createEditTaskNameInputField, createEditDat
                     let storedValue = taskPosition;
                     console.log(storedValue);
                     let deleteForm = document.getElementById("taskListingBox" + storedValue);
-                    deleteForm.remove();
+                    deleteFromLocalStorage(storedValue);
+                    //deleteForm.remove();
                     //localStorage.removeItem(storedValue);
-                    renderProjectPage(getFolder());
+                    //renderProjectPage(getFolder());
                     });
 
 

@@ -1,3 +1,5 @@
+import isValid from "date-fns/isValid";
+import { startOfToday, formatISO } from "date-fns";
 import { localStorageToCombinedArray, localStorageToProjectArray } from "./localStorageToArray";
 import { renderProjectPage } from "./renderProjects";
 import { getFolder } from "./setFolder";
@@ -90,6 +92,11 @@ function createEditDateInputField(position) {
     editDateField.min = "2022-05=30";
     editDateField.max = "2025-12-31";
     editDateField.addEventListener("change", function(){
+        if (isValid(this.value) == false){
+            let today = startOfToday();
+            let ISOToday = formatISO(today, { representation: 'date' });
+            this.value = ISOToday;
+        }
         combinedArray[position].changeTaskDate(this.value);
         writeToLocalStorage(combinedArray);
         renderProjectPage(getFolder());
