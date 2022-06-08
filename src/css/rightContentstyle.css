@@ -56,6 +56,7 @@
     height: 25px;
     border-radius: 75%;
     border: 2px solid;
+    order: 0;
 }
 
 #folderBox {
@@ -88,4 +89,11 @@
 
 #sortBox {
     align-self: flex-end;
+}
+.taskListingFolder {
+    order: 3;
+}
+
+.editDateField {
+    order: -1;
 }

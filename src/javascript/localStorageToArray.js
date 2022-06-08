@@ -17,10 +17,16 @@ function localStorageToTaskArray(){
                         this.isCompleted = true;    
                        }
                 }
+                function changeTaskName(newName){
+                   this.task = newName;
+                }
+                function changeTaskFolder(newFolder){
+                    this.folder = newFolder;
+                }
 
                 
 
-                return {type, folder, task, priority, date, position, isCompleted, changeCompletion}
+                return {type, folder, task, priority, date, position, isCompleted, changeCompletion, changeTaskName, changeTaskFolder}
             }
         
             let newTask = prototypedTaskFactory(retrieved.type,
@@ -77,10 +83,17 @@ function localStorageToCombinedArray(){
                         this.isCompleted = true;
                        }
                 }
-
+                function changeTaskName(newName){
+                    this.task = newName;
+                }
+                function changeTaskFolder(newFolder){
+                    this.folder = newFolder;
+                }
+                function changeTaskDate(newDate){
+                    this.date = newDate;
+                }
                 
-
-                return {type, folder, task, priority, date, position, isCompleted, changeCompletion}
+                return {type, folder, task, priority, date, position, isCompleted, changeCompletion, changeTaskName, changeTaskFolder, changeTaskDate}
             }
         
             let newTask = prototypedTaskFactory(retrieved.type,

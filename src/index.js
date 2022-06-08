@@ -3,7 +3,7 @@ import './css/ToDoTaskFormstyle.css'
 import './css/AddTaskButtonstyle.css'
 import './css/projectModal.css'
 import './css/rightContentstyle.css'
-
+import './css/editTaskListingstyle.css'
 
 
 import { createAddTaskButton } from './javascript/createAddTaskButton';

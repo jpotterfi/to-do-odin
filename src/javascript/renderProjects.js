@@ -5,6 +5,7 @@ import { createAddTaskButton } from './createAddTaskButton';
 import { writeToLocalStorage } from './writeToLocalStorage';
 import startOfToday from 'date-fns/startOfToday';
 import parseISO from 'date-fns/parseISO';
+import { createEditFolderInputField, createEditTaskNameInputField, createEditDateInputField } from './createEditInputField';
 
 
 
@@ -134,6 +135,7 @@ import parseISO from 'date-fns/parseISO';
 
                     let taskListingLeftContainer = document.createElement("div");
                     taskListingLeftContainer.className = "taskListingLeftContainer";
+                    taskListingLeftContainer.id = "taskListingLeftContainer" + taskPosition;
                     let taskListingIsCompleted = document.createElement("div");
                     taskListingIsCompleted.className = "taskListingIsCompleted";
                     taskListingIsCompleted.id = taskPosition;
@@ -157,11 +159,28 @@ import parseISO from 'date-fns/parseISO';
                     let taskListingName = document.createElement("div");
                     taskListingName.className = "taskListingName";
                     taskListingName.innerHTML = taskName;
-                    taskListingName.id = taskPosition;
+                    taskListingName.id = "taskListingName" + taskPosition;
+
+                    taskListingName.addEventListener("click", function(){
+                    let storedPosition = taskPosition;
+                    createEditTaskNameInputField(storedPosition, taskName);
+
+                    });
 
                     let taskListingFolder = document.createElement("div");
                     taskListingFolder.className = "taskListingFolder";
-                    taskListingFolder.innerHTML = "(" + taskFolder + ")"; 
+                    taskListingFolder.innerHTML = "(" + taskFolder + ")";
+                    taskListingFolder.id = "taskListingFolder" + taskPosition; 
+
+                    //event listener for taskListingFolder
+                    taskListingFolder.addEventListener("click", function(){
+                    let storedPosition = taskPosition;
+                    let storedFolder = taskFolder;
+                    createEditFolderInputField(storedPosition, storedFolder);    
+                    })
+
+
+                    //event listener for taskListingFolder
 
                     if (taskIsCompleted == true){
                         taskListingIsCompleted.style.borderColor = "white";
@@ -179,24 +198,34 @@ import parseISO from 'date-fns/parseISO';
 
                     let taskListingRightContainer = document.createElement("div");
                     taskListingRightContainer.className = "taskListingRightContainer";
+                    taskListingRightContainer.id = "taskListingRightContainer" + taskPosition;
                     let taskListingDueTime = document.createElement("div");
                     taskListingDueTime.className = "taskListingDueTime";
+                    taskListingDueTime.id = "taskListingDueTime" + taskPosition;
                     taskListingDueTime.innerHTML = formatDistance(
                         taskDate,
                         currentDate,
                         { addSuffix: true }
                     )
+                    //event listner for taskListingDueTime
+                    taskListingDueTime.addEventListener("click", function(){
+                        let storedPosition = taskPosition;
+                        let storedDate = taskDate;
+                        createEditDateInputField(storedPosition);  
+                    });
 
                     let taskListingDelete = document.createElement("div");
                     taskListingDelete.className = "taskListingDelete";
-                    taskListingDelete.id = taskPosition;
+                    taskListingDelete.id = "taskListingDelete" + taskPosition;
                     taskListingDelete.innerHTML = "X";
 
                     //delete eventlistener
                     taskListingDelete.addEventListener("click", function(){
-                    let deleteForm = document.getElementById("taskListingBox" + taskListingDelete.id);
+                    let storedValue = taskPosition;
+                    console.log(storedValue);
+                    let deleteForm = document.getElementById("taskListingBox" + storedValue);
                     deleteForm.remove();
-                    localStorage.removeItem(taskListingDelete.id);
+                    //localStorage.removeItem(storedValue);
                     renderProjectPage(getFolder());
                     });
 
