@@ -3,6 +3,7 @@ import { createAddTaskButton } from "./createAddTaskButton";
 import { renderProjectPage } from "./renderProjects";
 import { getFolder } from "./setFolder";
 import isValid from 'date-fns/isValid';
+import parseISO from "date-fns/parseISO";
 
 function createToDoTaskForm(){
     let formTemplate = document.createElement("div");
@@ -151,9 +152,10 @@ function createToDoTaskForm(){
         let taskData = taskInput.value;
         let priorityData = prioritySelection;
         let dateData = dateInput.value;
-        console.log("dateData is " + dateData)
-        console.log(isValid(dateData))
-        if (isValid(dateData) === false){
+        let dateObject = new Date(dateData);
+        console.log("dateObject is " + dateObject);
+        console.log(isValid(dateObject));
+        if (isValid(dateObject) === false){
             dateData = ISOToday;
         }
 

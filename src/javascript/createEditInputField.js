@@ -78,6 +78,8 @@ function createEditFolderInputField(position, storedFolder){
 }
 
 function createEditDateInputField(position) {
+    let today = startOfToday();
+    let ISOToday = formatISO(today, { representation: 'date' });
     let rightContainerBox = document.getElementById("taskListingRightContainer" + position);
     let previousField = document.getElementById("taskListingDueTime" + position);
     let combinedArray = localStorageToCombinedArray();
@@ -89,10 +91,11 @@ function createEditDateInputField(position) {
     editDateField.className = "editDateField"
     editDateField.name = "editDateField";
     editDateField.value = combinedArray[position].date;
-    editDateField.min = "2022-05=30";
+    editDateField.min = ISOToday;
     editDateField.max = "2025-12-31";
     editDateField.addEventListener("change", function(){
-        if (isValid(this.value) == false){
+        let dateObject = new Date(this.value);
+        if (isValid(dateObject) === false){
             let today = startOfToday();
             let ISOToday = formatISO(today, { representation: 'date' });
             this.value = ISOToday;
