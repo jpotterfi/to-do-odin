@@ -7,18 +7,20 @@
     background-color: black;
     padding-top: 20px;
     gap: 16px;
-    padding-left: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
     
 }
 
 #folderHeader {
     font-size: 50px;
     color: white;
+    font-family:initial;
 }
 
 #taskListing{
     color: white;
-    width: 99%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -71,14 +73,21 @@
 
 #folderBoxHeader {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+#folderHeaderContainer {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
 }
 
 #folderHeader {
     font-size: 50px;
+    order: -1;
 }
 
 #timeHeaderContainer {
@@ -94,6 +103,7 @@
     order: 3;
 }
 
-.editDateField {
-    order: -1;
+.folderDescription {
+    font-family: monospace;
+    max-width: 35%;
 }

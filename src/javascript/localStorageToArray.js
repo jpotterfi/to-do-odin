@@ -68,7 +68,34 @@ function localStorageToCombinedArray(){
         let retrieved = localStorage.getItem(i);
         retrieved = JSON.parse(retrieved);
         if (retrieved.type == "project") {   
-            combinedArray.push(retrieved);
+            const prototypedProjectFactory = (type, projectName, projectDescription, position) => {
+
+                function changeProjectDescription(newDescription){
+                    this.projectDescription = newDescription;
+                }
+                function changeProjectName(newName){
+                    this.projectName = newName;
+                }
+                
+                return {type, projectName, projectDescription, position, changeProjectDescription, changeProjectName}
+            }
+        
+            let newProject = prototypedProjectFactory(retrieved.type,
+                                                      retrieved.projectName,
+                                                      retrieved.projectDescription,
+                                                      retrieved.position,
+                                                     )
+
+            combinedArray.push(newProject);
+
+
+            //combinedArray.push(retrieved);
+
+
+
+
+
+
         }
         if (retrieved.type == "task") {
             

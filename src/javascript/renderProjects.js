@@ -5,7 +5,7 @@ import { createAddTaskButton } from './createAddTaskButton';
 import { writeToLocalStorage } from './writeToLocalStorage';
 import startOfToday from 'date-fns/startOfToday';
 import parseISO from 'date-fns/parseISO';
-import { createEditFolderInputField, createEditTaskNameInputField, createEditDateInputField } from './createEditInputField';
+import { createEditFolderInputField, createEditTaskNameInputField, createEditDateInputField, createEditProjectDescriptionInputField } from './createEditInputField';
 import { deleteFromLocalStorage } from './deleteFromLocalStorage';
 
 
@@ -60,9 +60,18 @@ import { deleteFromLocalStorage } from './deleteFromLocalStorage';
          let folderBoxHeader = document.createElement("div");
          folderBoxHeader.id = "folderBoxHeader";
          
+         let folderHeaderContainer = document.createElement("div");
+         folderHeaderContainer.id = "folderHeaderContainer";
+
          let folderHeader = document.createElement("div");
          folderHeader.id = "folderHeader"
          folderHeader.innerHTML = folderName;
+        
+         if (folderName != "Inbox"){
+            folderHeader.addEventListener("click", function(){
+                createEditProjectNameInputField(folderName)
+            })
+         }
          
          let timeHeaderContainer = document.createElement("div");
          timeHeaderContainer.id = "timeHeaderContainer";
@@ -78,9 +87,11 @@ import { deleteFromLocalStorage } from './deleteFromLocalStorage';
          timeHeaderContainer.appendChild(todayHeader);
          timeHeaderContainer.appendChild(weekHeader);
 
-         folderBoxHeader.appendChild(folderHeader);
-         folderBoxHeader.appendChild(timeHeaderContainer);
+         folderHeaderContainer.appendChild(folderHeader);
+         folderHeaderContainer.appendChild(timeHeaderContainer);
         
+         folderBoxHeader.appendChild(folderHeaderContainer);
+
          folderBox.appendChild(folderBoxHeader);
 
          rightContent.appendChild(folderBox);
@@ -97,7 +108,17 @@ import { deleteFromLocalStorage } from './deleteFromLocalStorage';
             }
         }
          let folderDescription = document.createElement("div");
+         folderDescription.className = "folderDescription";
+         folderDescription.id = folderName;
          folderDescription.innerHTML = getDescription();
+        //event listener for folderDescription
+        folderDescription.addEventListener("click", function(){
+            createEditProjectDescriptionInputField(folderName, getDescription());
+        })
+
+
+
+        //event listener for folderDescription
         //get description for current folder/project;
         
          folderBox.appendChild(folderDescription);
@@ -196,6 +217,7 @@ import { deleteFromLocalStorage } from './deleteFromLocalStorage';
                     taskListingLeftContainer.appendChild(taskListingIsCompleted);
                     taskListingLeftContainer.appendChild(taskListingName);
                     taskListingLeftContainer.appendChild(taskListingFolder);
+
 
                     let taskListingRightContainer = document.createElement("div");
                     taskListingRightContainer.className = "taskListingRightContainer";

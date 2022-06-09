@@ -108,8 +108,63 @@ function createEditDateInputField(position) {
     rightContainerBox.appendChild(editDateField);
 }
 
+function createEditProjectDescriptionInputField (folder, previousDescription){
+    let previousField = document.getElementById(folder);
+    let folderBoxHeader = document.getElementById("folderBoxHeader");
+    previousField.remove();
+    let editProjectDescriptionInputContainer = document.createElement("div");
+    editProjectDescriptionInputContainer.id = "editProjectDescriptionInputContainer";
+    let editProjectDescriptionConfirm = document.createElement("div");
+    editProjectDescriptionConfirm.id = "editProjectDescriptionConfirm";
+    
+    editProjectDescriptionConfirm.addEventListener("click", function(){
+        let newDescription = editProjectDescriptionInputField.value;
+        let storedFolder = folder;
+        let combinedArray = localStorageToCombinedArray();
+        
+        function findPosition(name){
+            for (let i = 0; i < combinedArray.length; i ++){
+                if (combinedArray[i].type == "project" && combinedArray[i].projectName == name){
+                    let position = i;
+                    return position
+                }
+            }
+        }
+        combinedArray[findPosition(storedFolder)].changeProjectDescription(newDescription);
+        writeToLocalStorage(combinedArray);
+        renderProjectPage(getFolder());
+        
+    });
+    
+    
+    let editProjectDescriptionDeny = document.createElement("div");
+    editProjectDescriptionDeny.id = "editProjectDescriptionDeny";
+    let editProjectDescriptionInputField = document.createElement("textarea");
+    editProjectDescriptionInputField.id = "editProjectDescriptionInputField";
+    editProjectDescriptionInputField.cols = "15";
+    editProjectDescriptionInputField.rows = "5";
+    editProjectDescriptionInputField.value = previousDescription;
+    editProjectDescriptionInputField.contentEditable = true;
+    let editProjectDescriptionButtonContainer = document.createElement("div");
+    editProjectDescriptionButtonContainer.id = "editProjectDescriptionButtonContainer";
+
+    editProjectDescriptionInputContainer.appendChild(editProjectDescriptionInputField);
+    editProjectDescriptionButtonContainer.appendChild(editProjectDescriptionConfirm);
+    editProjectDescriptionButtonContainer.appendChild(editProjectDescriptionDeny);
+
+    editProjectDescriptionInputContainer.appendChild(editProjectDescriptionButtonContainer);
+
+    folderBoxHeader.appendChild(editProjectDescriptionInputContainer);
+}
+function createEditProjectNameInputField(folder){
+    let previousField = document.getElementById("folderHeader");
+    
+}
+
 export {
     createEditTaskNameInputField,
     createEditFolderInputField,
-    createEditDateInputField
+    createEditDateInputField,
+    createEditProjectDescriptionInputField,
+    createEditProjectNameInputField
 }

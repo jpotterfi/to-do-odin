@@ -31,3 +31,47 @@
 	background-image: url("close-circle.svg");
 	background-size:contain;
 }
+
+.editDateField {
+    order: -1;
+}
+
+#editProjectDescriptionConfirm{
+    height: 25px;
+	width: 25px;
+	border-radius: 50%;
+	background-image: url("check-circle.svg");
+	background-size:contain;
+	border-radius: none;
+}
+
+#editProjectDescriptionDeny{
+	height: 25px;
+	width: 25px;
+	border-radius: 50%;
+	background-image: url("close-circle.svg");
+	background-size:contain;
+}
+
+#editProjectDescriptionInputContainer{
+	order: 0;
+	width: 50%;
+}
+
+#editProjectDescriptionButtonContainer{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 75%;
+	gap: 16px;
+	
+}
+
+#editProjectDescriptionInputField{
+	background-color: rgba(0, 0, 0, 0.1);
+	border: white 1px solid;
+	color: white;
+	outline: none;
+	width: 75%;
+
+}
