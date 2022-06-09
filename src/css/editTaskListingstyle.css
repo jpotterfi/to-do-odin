@@ -75,3 +75,43 @@
 	width: 75%;
 
 }
+
+#editProjectNameDeny{
+	height: 25px;
+	width: 25px;
+	border-radius: 50%;
+	background-image: url("close-circle.svg");
+	background-size:contain;
+}
+
+#editProjectNameConfirm{
+	height: 25px;
+	width: 25px;
+	border-radius: 50%;
+	background-image: url("check-circle.svg");
+	background-size:contain;
+	border-radius: none;
+}
+
+#editProjectNameInputBox {
+	order: -1;
+	display: flex;
+	flex-direction: row;
+	gap: 4px;
+}
+
+#editProjectNameInputField {
+	background-color: rgba(0, 0, 0, 0.1);
+	border: white 1px solid;
+	color: white;
+	outline: none;
+	font-size: 50px;
+	width: 50%;
+}
+
+#editProjectNameButtonBox{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 4px;
+}

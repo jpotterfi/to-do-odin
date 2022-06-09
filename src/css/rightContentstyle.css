@@ -85,7 +85,7 @@
     align-items: center;
 }
 
-#folderHeader {
+#folderHeaderName {
     font-size: 50px;
     order: -1;
 }

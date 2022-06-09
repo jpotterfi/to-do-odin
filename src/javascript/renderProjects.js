@@ -5,7 +5,7 @@ import { createAddTaskButton } from './createAddTaskButton';
 import { writeToLocalStorage } from './writeToLocalStorage';
 import startOfToday from 'date-fns/startOfToday';
 import parseISO from 'date-fns/parseISO';
-import { createEditFolderInputField, createEditTaskNameInputField, createEditDateInputField, createEditProjectDescriptionInputField } from './createEditInputField';
+import { createEditFolderInputField, createEditTaskNameInputField, createEditDateInputField, createEditProjectDescriptionInputField, createEditProjectNameInputField } from './createEditInputField';
 import { deleteFromLocalStorage } from './deleteFromLocalStorage';
 
 
@@ -63,13 +63,13 @@ import { deleteFromLocalStorage } from './deleteFromLocalStorage';
          let folderHeaderContainer = document.createElement("div");
          folderHeaderContainer.id = "folderHeaderContainer";
 
-         let folderHeader = document.createElement("div");
-         folderHeader.id = "folderHeader"
-         folderHeader.innerHTML = folderName;
+         let folderHeaderName = document.createElement("div");
+         folderHeaderName.id = "folderHeaderName"
+         folderHeaderName.innerHTML = folderName;
         
          if (folderName != "Inbox"){
-            folderHeader.addEventListener("click", function(){
-                createEditProjectNameInputField(folderName)
+            folderHeaderName.addEventListener("click", function(){
+                createEditProjectNameInputField(folderName);
             })
          }
          
@@ -87,7 +87,7 @@ import { deleteFromLocalStorage } from './deleteFromLocalStorage';
          timeHeaderContainer.appendChild(todayHeader);
          timeHeaderContainer.appendChild(weekHeader);
 
-         folderHeaderContainer.appendChild(folderHeader);
+         folderHeaderContainer.appendChild(folderHeaderName);
          folderHeaderContainer.appendChild(timeHeaderContainer);
         
          folderBoxHeader.appendChild(folderHeaderContainer);
@@ -125,7 +125,7 @@ import { deleteFromLocalStorage } from './deleteFromLocalStorage';
 
          let sortBox = document.createElement("div");
          sortBox.id = "sortBox";
-         sortBox.innerHTML = "sort by date";
+         sortBox.innerHTML = "sort by due date";
          //add sorts later
 
          folderBox.appendChild(sortBox);

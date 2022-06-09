@@ -155,6 +155,11 @@ function createToDoTaskForm(){
         let dateObject = new Date(dateData);
         console.log("dateObject is " + dateObject);
         console.log(isValid(dateObject));
+
+        if (taskData == ""){
+            taskData = "Untitled";
+        }
+
         if (isValid(dateObject) === false){
             dateData = ISOToday;
         }

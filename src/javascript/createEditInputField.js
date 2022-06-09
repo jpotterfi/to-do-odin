@@ -1,8 +1,8 @@
 import isValid from "date-fns/isValid";
 import { startOfToday, formatISO } from "date-fns";
 import { localStorageToCombinedArray, localStorageToProjectArray } from "./localStorageToArray";
-import { renderProjectPage } from "./renderProjects";
-import { getFolder } from "./setFolder";
+import { renderProjectHeadings, renderProjectPage } from "./renderProjects";
+import { getFolder, setFolder } from "./setFolder";
 import { writeToLocalStorage } from "./writeToLocalStorage";
 
 function createEditTaskNameInputField(position, taskName){
@@ -157,8 +157,61 @@ function createEditProjectDescriptionInputField (folder, previousDescription){
     folderBoxHeader.appendChild(editProjectDescriptionInputContainer);
 }
 function createEditProjectNameInputField(folder){
-    let previousField = document.getElementById("folderHeader");
+    let previousField = document.getElementById("folderHeaderName");
+    previousField.remove();
+    let editProjectNameInputBox = document.createElement("div");
+    editProjectNameInputBox.id = "editProjectNameInputBox"
+    let editProjectNameInputField = document.createElement("input");
+    editProjectNameInputField.id = "editProjectNameInputField";
+    editProjectNameInputField.value = folder;
+    let editProjectNameButtonBox = document.createElement("div");
+    editProjectNameButtonBox.id = "editProjectNameButtonBox";
+    let editProjectNameConfirm = document.createElement("div");
+    editProjectNameConfirm.id = "editProjectNameConfirm";
+    let editProjectNameDeny = document.createElement("div");
+    editProjectNameDeny.id = "editProjectNameDeny";
+
+    editProjectNameButtonBox.appendChild(editProjectNameConfirm);
+    editProjectNameButtonBox.appendChild(editProjectNameDeny);
     
+    editProjectNameInputBox.appendChild(editProjectNameInputField);
+    editProjectNameInputBox.appendChild(editProjectNameButtonBox);
+
+    let folderHeaderContainer = document.getElementById("folderHeaderContainer")
+    folderHeaderContainer.appendChild(editProjectNameInputBox)
+
+    editProjectNameConfirm.addEventListener("click", function(){
+        let combinedArray = localStorageToCombinedArray();
+        let storedFolder = folder;
+        let newName = editProjectNameInputField.value;
+        function findPosition(name){
+            for (let i = 0; i < combinedArray.length; i ++){
+                if (combinedArray[i].type == "project" && combinedArray[i].projectName == name){
+                    let position = i;
+                    return position
+                }
+            }
+        }
+        console.log(findPosition(storedFolder));
+        console.log(combinedArray[findPosition(storedFolder)].changeProjectName(newName));
+        
+        function moveTasksToNewFolder(oldProject, newProject){
+            for (let i = 0; i < combinedArray.length; i ++){
+                if (combinedArray[i].type == "task"){
+                    if (combinedArray[i].folder == oldProject){
+                        combinedArray[i].changeTaskFolder(newProject);
+                    }
+                }
+            }
+        }
+
+        moveTasksToNewFolder(storedFolder, newName);
+        writeToLocalStorage(combinedArray);
+        setFolder(newName);
+        renderProjectHeadings();
+        renderProjectPage(getFolder());
+
+    });
 }
 
 export {
