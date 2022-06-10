@@ -8,9 +8,13 @@ import './css/editTaskListingstyle.css'
 
 import { createAddTaskButton } from './javascript/createAddTaskButton';
 import { createNewProject } from './javascript/createNewProject';
-import { localStorageToTaskArray, localStorageToProjectArray } from './javascript/localStorageToArray'
+import { localStorageToTaskArray, localStorageToProjectArray, localStorageToCombinedArray } from './javascript/localStorageToArray'
 import { renderProjectHeadings, renderProjectPage } from './javascript/renderProjects'
 import { setFolder, getFolder } from './javascript/setFolder'
+import { differenceInDays } from 'date-fns'
+import { startOfToday } from 'date-fns'
+import { sortArray } from './javascript/sortArray';
+import { setSort } from './javascript/currentSort';
 
 let inboxFolder = document.getElementById("inboxHeader");
 inboxFolder.addEventListener("click", function(){
@@ -46,6 +50,49 @@ renderProjectPage("Inbox");
 console.log(localStorageToTaskArray())
 
 console.log(localStorageToProjectArray())
+
+
+//console.log("alpha" > "b");
+//setSort("alpha");
+//console.table(sortArray());
+
+
+/*
+let today = startOfToday();
+        let combinedArray = localStorageToCombinedArray();
+        const sorted = combinedArray.sort(function(a,b){
+            if (a.type == "task" && b.type == "task"){
+                let dateA = new Date(a.date);
+                let dateB = new Date(b.date);
+                let differenceA = differenceInDays(today, dateA);
+                let differenceB = differenceInDays(today, dateB);
+                if (differenceA > differenceB){
+                    return -1
+                } else {
+                    return 1
+                }
+            }
+
+        });
+        console.log(combinedArray);
+        console.log(sorted)
+*/
+
+
+
+/*
+let dateA = new Date(2020, 5, 1);
+let dateB = new Date(2020, 2, 1);
+let today = startOfToday();
+
+let taskArray = localStorageToTaskArray();
+for (let i = 0; i < taskArray.length; i ++){
+    dateB = taskArray[i].date
+    console.log(differenceInDays(today, dateB))
+}
+
+console.log(differenceInDays(today, dateB))
+*/
 
 
 

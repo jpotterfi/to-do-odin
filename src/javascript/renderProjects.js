@@ -7,6 +7,8 @@ import startOfToday from 'date-fns/startOfToday';
 import parseISO from 'date-fns/parseISO';
 import { createEditFolderInputField, createEditTaskNameInputField, createEditDateInputField, createEditProjectDescriptionInputField, createEditProjectNameInputField } from './createEditInputField';
 import { deleteFromLocalStorage } from './deleteFromLocalStorage';
+import { sortArray } from './sortArray';
+import { setSort } from './currentSort';
 
 
 
@@ -125,8 +127,17 @@ import { deleteFromLocalStorage } from './deleteFromLocalStorage';
 
          let sortBox = document.createElement("div");
          sortBox.id = "sortBox";
-         sortBox.innerHTML = "sort by due date";
+         let sortHeading = document.createElement("div");
+         sortHeading.id = "sortHeading";
+         sortHeading.innerHTML = "sort by"
+
+         let sortAnchor = document.createElement("div");
+         sortAnchor.id = "sortAnchor";
+         sortAnchor.innerHTML = "due date"
          //add sorts later
+         
+         sortBox.appendChild(sortHeading);
+         sortBox.appendChild(sortAnchor);
 
          folderBox.appendChild(sortBox);
         }
@@ -135,6 +146,8 @@ import { deleteFromLocalStorage } from './deleteFromLocalStorage';
             let tasksArray = localStorageToTaskArray();
             let taskListing = document.getElementById("taskListing");
             let combinedArray = localStorageToCombinedArray();
+            //setSort("priority");
+            combinedArray = sortArray();
             console.log(combinedArray);
             let currentDate = startOfToday();
             console.log(currentDate);

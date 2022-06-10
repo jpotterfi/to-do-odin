@@ -98,6 +98,8 @@
 
 #sortBox {
     align-self: flex-end;
+    display: flex;
+    flex-direction: row;
 }
 .taskListingFolder {
     order: 3;
