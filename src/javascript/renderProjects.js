@@ -8,7 +8,8 @@ import parseISO from 'date-fns/parseISO';
 import { createEditFolderInputField, createEditTaskNameInputField, createEditDateInputField, createEditProjectDescriptionInputField, createEditProjectNameInputField } from './createEditInputField';
 import { deleteFromLocalStorage } from './deleteFromLocalStorage';
 import { sortArray } from './sortArray';
-import { setSort } from './currentSort';
+import { getSort, setSort } from './currentSort';
+import { createSortDropDown } from './createSortDropDown';
 
 
 
@@ -75,6 +76,7 @@ import { setSort } from './currentSort';
             })
          }
          
+         /*
          let timeHeaderContainer = document.createElement("div");
          timeHeaderContainer.id = "timeHeaderContainer";
 
@@ -88,9 +90,10 @@ import { setSort } from './currentSort';
 
          timeHeaderContainer.appendChild(todayHeader);
          timeHeaderContainer.appendChild(weekHeader);
+         */
 
          folderHeaderContainer.appendChild(folderHeaderName);
-         folderHeaderContainer.appendChild(timeHeaderContainer);
+         //folderHeaderContainer.appendChild(timeHeaderContainer);
         
          folderBoxHeader.appendChild(folderHeaderContainer);
 
@@ -111,12 +114,16 @@ import { setSort } from './currentSort';
         }
          let folderDescription = document.createElement("div");
          folderDescription.className = "folderDescription";
-         folderDescription.id = folderName;
+         folderDescription.id = "folderDescription";
          folderDescription.innerHTML = getDescription();
         //event listener for folderDescription
-        folderDescription.addEventListener("click", function(){
-            createEditProjectDescriptionInputField(folderName, getDescription());
-        })
+        if (folder != "Inbox"){
+            folderDescription.addEventListener("click", function(){
+                createEditProjectDescriptionInputField(folderName, getDescription());
+            })
+        }
+
+        
 
 
 
@@ -133,9 +140,22 @@ import { setSort } from './currentSort';
 
          let sortAnchor = document.createElement("div");
          sortAnchor.id = "sortAnchor";
-         sortAnchor.innerHTML = "due date"
-         //add sorts later
+
+        if (getSort() == "dueDate"){
+            sortAnchor.innerHTML = "due date"
+        }
+        if (getSort() == "priority"){
+            sortAnchor.innerHTML = "priority"
+        }
+        if (getSort() == "alpha"){
+            sortAnchor.innerHTML = "alphabetical"
+        }
+
          
+         sortAnchor.addEventListener("click", function(){
+            createSortDropDown();
+         });
+
          sortBox.appendChild(sortHeading);
          sortBox.appendChild(sortAnchor);
 
@@ -146,7 +166,6 @@ import { setSort } from './currentSort';
             let tasksArray = localStorageToTaskArray();
             let taskListing = document.getElementById("taskListing");
             let combinedArray = localStorageToCombinedArray();
-            //setSort("priority");
             combinedArray = sortArray();
             console.log(combinedArray);
             let currentDate = startOfToday();
@@ -180,6 +199,7 @@ import { setSort } from './currentSort';
 
                     //event listener for IsCompleted
                     taskListingIsCompleted.addEventListener("click", function(){
+                        combinedArray = localStorageToCombinedArray();
                         combinedArray[taskListingIsCompleted.id].changeCompletion();
                         writeToLocalStorage(combinedArray);
                         renderProjectPage(getFolder());

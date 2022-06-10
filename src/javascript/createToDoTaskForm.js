@@ -119,8 +119,7 @@ function createToDoTaskForm(){
     dateInput.id = "dateInput";
     dateInput.name = "dateInput";
     dateInput.value = ISOToday; //"2022-05-30"
-    dateInput.min = "2022-05=30";
-    dateInput.max = "2025-12-31";
+    dateInput.min = ISOToday;
 
     dateField.appendChild(dateInput);
 

@@ -18,8 +18,23 @@ function createEditTaskNameInputField(position, taskName){
     editTaskNameInputField.className = "editTaskNameInputField";
     editTaskNameInputField.value = taskName;
     
+
+    editTaskNameInputField.addEventListener("change", function(){
+        let newName = editTaskNameInputField.value;
+        combinedArray[position].changeTaskName(newName);
+        console.log(combinedArray[position].task)
+        writeToLocalStorage(combinedArray);
+        renderProjectPage(getFolder());
+    })
+
+    editTaskNameInputField.addEventListener("focusout", function(){
+        renderProjectPage(getFolder());
+    })
+
+
     editTaskNameBox.appendChild(editTaskNameInputField);
 
+    /*
     let editConfirm = document.createElement("div");
     editConfirm.className = "editConfirm";
     editConfirm.id = position;
@@ -27,6 +42,9 @@ function createEditTaskNameInputField(position, taskName){
     editDeny.className = "editDeny";
     editDeny.id = position;
 
+    editDeny.addEventListener("click", function(){
+        renderProjectPage(getFolder());
+    })
     
 
     //event listeners
@@ -42,8 +60,10 @@ function createEditTaskNameInputField(position, taskName){
 
     editTaskNameBox.appendChild(editConfirm);
     editTaskNameBox.appendChild(editDeny);
+    */
 
     taskListingLeftContainer.appendChild(editTaskNameBox);
+    editTaskNameInputField.focus();
 }
 
 function createEditFolderInputField(position, storedFolder){
@@ -53,6 +73,10 @@ function createEditFolderInputField(position, storedFolder){
     let taskListingLeftContainer = document.getElementById("taskListingLeftContainer" + position);
     let folderDropDown = document.createElement("select");
     folderDropDown.className = "folderDropDown";
+
+    folderDropDown.addEventListener('focusout', function(){
+        renderProjectPage(getFolder());
+    });
 
     let originalFolder = document.createElement("option");
     originalFolder.value = storedFolder;
@@ -75,6 +99,7 @@ function createEditFolderInputField(position, storedFolder){
         renderProjectPage(getFolder());
     })
     taskListingLeftContainer.appendChild(folderDropDown);
+    folderDropDown.focus();
 }
 
 function createEditDateInputField(position) {
@@ -92,7 +117,11 @@ function createEditDateInputField(position) {
     editDateField.name = "editDateField";
     editDateField.value = combinedArray[position].date;
     editDateField.min = ISOToday;
-    editDateField.max = "2025-12-31";
+
+    editDateField.addEventListener('focusout', function(){
+        renderProjectPage(getFolder());
+      });
+    
     editDateField.addEventListener("change", function(){
         let dateObject = new Date(this.value);
         if (isValid(dateObject) === false){
@@ -104,16 +133,20 @@ function createEditDateInputField(position) {
         writeToLocalStorage(combinedArray);
         renderProjectPage(getFolder());
     })
+    
 
     rightContainerBox.appendChild(editDateField);
+    editDateField.focus();
 }
 
 function createEditProjectDescriptionInputField (folder, previousDescription){
-    let previousField = document.getElementById(folder);
+    let previousField = document.getElementById("folderDescription");
     let folderBoxHeader = document.getElementById("folderBoxHeader");
     previousField.remove();
     let editProjectDescriptionInputContainer = document.createElement("div");
     editProjectDescriptionInputContainer.id = "editProjectDescriptionInputContainer";
+    
+    /*
     let editProjectDescriptionConfirm = document.createElement("div");
     editProjectDescriptionConfirm.id = "editProjectDescriptionConfirm";
     
@@ -139,22 +172,58 @@ function createEditProjectDescriptionInputField (folder, previousDescription){
     
     let editProjectDescriptionDeny = document.createElement("div");
     editProjectDescriptionDeny.id = "editProjectDescriptionDeny";
+
+    editProjectDescriptionDeny.addEventListener("click", function(){
+        renderProjectPage(getFolder());
+    })
+
+    */
+
+
+
     let editProjectDescriptionInputField = document.createElement("textarea");
     editProjectDescriptionInputField.id = "editProjectDescriptionInputField";
     editProjectDescriptionInputField.cols = "15";
     editProjectDescriptionInputField.rows = "5";
     editProjectDescriptionInputField.value = previousDescription;
     editProjectDescriptionInputField.contentEditable = true;
-    let editProjectDescriptionButtonContainer = document.createElement("div");
-    editProjectDescriptionButtonContainer.id = "editProjectDescriptionButtonContainer";
+
+
+
+    editProjectDescriptionInputField.addEventListener("change", function(){
+        let newDescription = editProjectDescriptionInputField.value;
+        let storedFolder = folder;
+        let combinedArray = localStorageToCombinedArray();
+        function findPosition(name){
+            for (let i = 0; i < combinedArray.length; i ++){
+                if (combinedArray[i].type == "project" && combinedArray[i].projectName == name){
+                    let position = i;
+                    return position
+                }
+            }
+        }
+        combinedArray[findPosition(storedFolder)].changeProjectDescription(newDescription);
+        writeToLocalStorage(combinedArray);
+        renderProjectPage(getFolder());
+    })
+
+    editProjectDescriptionInputField.addEventListener("focusout", function(){
+        renderProjectPage(getFolder());
+    })
+
+
+    //let editProjectDescriptionButtonContainer = document.createElement("div");
+    //editProjectDescriptionButtonContainer.id = "editProjectDescriptionButtonContainer";
 
     editProjectDescriptionInputContainer.appendChild(editProjectDescriptionInputField);
-    editProjectDescriptionButtonContainer.appendChild(editProjectDescriptionConfirm);
-    editProjectDescriptionButtonContainer.appendChild(editProjectDescriptionDeny);
+    //editProjectDescriptionButtonContainer.appendChild(editProjectDescriptionConfirm);
+    //editProjectDescriptionButtonContainer.appendChild(editProjectDescriptionDeny);
 
-    editProjectDescriptionInputContainer.appendChild(editProjectDescriptionButtonContainer);
+    //editProjectDescriptionInputContainer.appendChild(editProjectDescriptionButtonContainer);
 
     folderBoxHeader.appendChild(editProjectDescriptionInputContainer);
+
+    editProjectDescriptionInputField.focus();
 }
 function createEditProjectNameInputField(folder){
     let previousField = document.getElementById("folderHeaderName");
@@ -164,6 +233,8 @@ function createEditProjectNameInputField(folder){
     let editProjectNameInputField = document.createElement("input");
     editProjectNameInputField.id = "editProjectNameInputField";
     editProjectNameInputField.value = folder;
+
+    /*
     let editProjectNameButtonBox = document.createElement("div");
     editProjectNameButtonBox.id = "editProjectNameButtonBox";
     let editProjectNameConfirm = document.createElement("div");
@@ -171,15 +242,60 @@ function createEditProjectNameInputField(folder){
     let editProjectNameDeny = document.createElement("div");
     editProjectNameDeny.id = "editProjectNameDeny";
 
+    editProjectNameDeny.addEventListener("click", function(){
+        renderProjectPage(getFolder());
+    })
     editProjectNameButtonBox.appendChild(editProjectNameConfirm);
     editProjectNameButtonBox.appendChild(editProjectNameDeny);
+
+    */
+    editProjectNameInputField.addEventListener("change", function(){
+        
+            let combinedArray = localStorageToCombinedArray();
+            let storedFolder = folder;
+            let newName = editProjectNameInputField.value;
+            function findPosition(name){
+                for (let i = 0; i < combinedArray.length; i ++){
+                    if (combinedArray[i].type == "project" && combinedArray[i].projectName == name){
+                        let position = i;
+                        return position
+                    }
+                }
+            }
+            console.log(findPosition(storedFolder));
+            console.log(combinedArray[findPosition(storedFolder)].changeProjectName(newName));
+            
+            function moveTasksToNewFolder(oldProject, newProject){
+                for (let i = 0; i < combinedArray.length; i ++){
+                    if (combinedArray[i].type == "task"){
+                        if (combinedArray[i].folder == oldProject){
+                            combinedArray[i].changeTaskFolder(newProject);
+                        }
+                    }
+                }
+            }
+    
+            moveTasksToNewFolder(storedFolder, newName);
+            writeToLocalStorage(combinedArray);
+            setFolder(newName);
+            renderProjectHeadings();
+            renderProjectPage(getFolder());
+    });
+    editProjectNameInputField.addEventListener("focusout", function(){
+        renderProjectPage(getFolder());
+    })
+
+    
     
     editProjectNameInputBox.appendChild(editProjectNameInputField);
-    editProjectNameInputBox.appendChild(editProjectNameButtonBox);
+    
+    //editProjectNameInputBox.appendChild(editProjectNameButtonBox);
 
     let folderHeaderContainer = document.getElementById("folderHeaderContainer")
     folderHeaderContainer.appendChild(editProjectNameInputBox)
+    editProjectNameInputField.focus();
 
+    /*
     editProjectNameConfirm.addEventListener("click", function(){
         let combinedArray = localStorageToCombinedArray();
         let storedFolder = folder;
@@ -212,6 +328,7 @@ function createEditProjectNameInputField(folder){
         renderProjectPage(getFolder());
 
     });
+    */
 }
 
 export {
