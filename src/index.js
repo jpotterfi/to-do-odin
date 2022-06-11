@@ -6,6 +6,7 @@ import './css/rightContentstyle.css'
 import './css/editTaskListingstyle.css'
 
 
+
 import { createAddTaskButton } from './javascript/createAddTaskButton';
 import { createNewProject } from './javascript/createNewProject';
 import { localStorageToTaskArray, localStorageToProjectArray, localStorageToCombinedArray } from './javascript/localStorageToArray'
@@ -15,6 +16,7 @@ import { differenceInDays } from 'date-fns'
 import { startOfToday } from 'date-fns'
 import { sortArray } from './javascript/sortArray';
 import { setSort } from './javascript/currentSort';
+
 
 let inboxFolder = document.getElementById("inboxHeader");
 inboxFolder.addEventListener("click", function(){
@@ -35,7 +37,7 @@ if (localStorage.length < 1){
         return {type, projectName, projectDescription, position};
       } 
 
-    let project = projectFactory("project", "Inbox", "An inbox of tasks for all projects.", localStorage.length)
+    let project = projectFactory("project", "Inbox", "An inbox of tasks for all your projects.", localStorage.length)
     project = JSON.stringify(project);
     localStorage.setItem("0", project);
 }

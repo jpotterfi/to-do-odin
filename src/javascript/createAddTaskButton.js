@@ -3,6 +3,7 @@ import { createToDoTaskForm } from './createToDoTaskForm';
 function createAddTaskButton() {
     let addTaskButton = document.createElement("div");
     addTaskButton.id = "addTaskButton";
+    addTaskButton.innerText = "New Task +";
 
     addTaskButton.addEventListener("click", function (){
         addTaskButton.remove();

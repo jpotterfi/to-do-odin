@@ -53,20 +53,22 @@ html,body {
     height: 100%;
     display: grid;
     grid-template: "leftContent rightContent" 1fr
-                    /1fr 3fr;
+                    /1fr 4fr;
 }
 
 #left-content{
     grid-area: leftContent;
-    background-color: #EDAFB8;
+    color: white;
+    background-color: #0C090A;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 20px;
-}
-
-#logo {
-    font-size: 60px;
+    border-right: 1px solid white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    font-family: 'Roboto';
 }
 
 #projectsContainer {
@@ -81,4 +83,57 @@ html,body {
     font-size: 50px;
 }
 
+#inboxHeader:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.projectFolderTitle {
+    font-size: 20px;
+}
+.projectFolderTitle:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
 
+#newProject {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    background: white;
+    color: #0C090A;
+    border-radius: 8px;
+    font-size: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#newProject:hover,
+#newProject:focus {
+    background: white;
+}
+
+#newProject:focus {
+    outline: 1px solid rgb(0, 0, 0);
+    outline-offset: -4px;
+}
+
+#newProject:active {
+    transform: scale(0.95);
+}
+
+#logo {
+    background-image: url("./logo.svg");
+    background-size: 100%;
+    height: 150px;
+    width: 150px;
+    margin-top: -15px;
+}

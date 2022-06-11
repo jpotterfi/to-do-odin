@@ -55,6 +55,7 @@ function createToDoTaskForm(){
     let priorityGreenLabel = document.createElement("label");
     priorityGreenLabel.id = "greenButton";
     priorityGreenLabel.htmlFor = "priorityGreen";
+    priorityGreenLabel.title = "Low Priority";
 
     let priorityOrangeInput = document.createElement("input");
     priorityOrangeInput.id = "priorityOrange";
@@ -64,6 +65,7 @@ function createToDoTaskForm(){
     let priorityOrangeLabel = document.createElement("label");
     priorityOrangeLabel.id = "orangeButton";
     priorityOrangeLabel.htmlFor = "priorityOrange";
+    priorityOrangeLabel.title = "Medium Priority";
 
     let priorityRedInput = document.createElement("input");
     priorityRedInput.id = "priorityRed"
@@ -73,18 +75,22 @@ function createToDoTaskForm(){
     let priorityRedLabel = document.createElement("label");
     priorityRedLabel.id = "redButton";
     priorityRedLabel.htmlFor = "priorityRed";
+    priorityRedLabel.title = "High Priority";
 
     let prioritySelection = "green";
     ///priority button event listeners
     priorityGreenLabel.addEventListener("click", function (){
         prioritySelection = "green";
+        form.style.borderColor = "#49FF00";
     });
 
     priorityOrangeLabel.addEventListener("click", function (){
         prioritySelection = "orange";
+        form.style.borderColor = "#FF9300";
     });
     priorityRedLabel.addEventListener("click", function (){
         prioritySelection = "red";
+        form.style.borderColor = "#FF0000";
     });
 
 

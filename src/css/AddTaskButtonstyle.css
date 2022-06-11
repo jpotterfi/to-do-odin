@@ -1,8 +1,38 @@
 #addTaskButton {
+    display: flex;
+    flex-direction: row;
     align-self: flex-end;
-    height: 50px;
-    width: 50px;
-    background-image: url("plus-circle.svg");
-    background-size: contain;
     margin-right: 4px;
+}
+
+
+#addTaskButton {
+    border: none;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    background: white;
+    color: #0C090A;
+    border-radius: 8px;
+    font-size: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#addTaskButton:hover,
+#addTaskButton:focus {
+    background: white;
+}
+
+#addTaskButton:focus {
+    outline: 1px solid rgb(0, 0, 0);
+    outline-offset: -4px;
+}
+
+#addTaskButton:active {
+    transform: scale(0.95);
 }

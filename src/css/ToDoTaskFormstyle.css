@@ -47,8 +47,21 @@
 }
 
 #greenButton {
-    background-color: #11FA50;
-	border: 3px #11FA50 solid;
+    background-color: #49FF00;
+	border: 3px #49FF00 solid;
+}
+
+
+
+#orangeButton {
+    background-color: #FF9300;
+	border: 3px #FF9300 solid;
+}
+
+/*
+#priorityOrange:checked + label {
+	box-shadow: none;
+	border: 3px white solid;
 }
 
 #priorityGreen:checked + label {
@@ -56,26 +69,18 @@
 	border: 3px white solid;
 }
 
-#orangeButton {
-    background-color: #FAC405;
-	border: 3px #FAC405 solid;
-}
-
-#priorityOrange:checked + label {
-	box-shadow: none;
-	border: 3px white solid;
-}
-
-#redButton {
-    background-color: #FA373C;
-	border: 3px #FA373C solid;
-}
-
 #priorityRed:checked + label {
 	box-shadow: none;
 	border: 3px white solid;
 	
+}*/
+
+#redButton {
+    background-color: #FF0000;
+	border: 3px #FF0000 solid;
 }
+
+
 
 #confirmButton {
 	height: 35px;

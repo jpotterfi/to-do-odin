@@ -24,7 +24,7 @@ import { createSortDropDown } from './createSortDropDown';
                 let projectFolder = document.createElement("div"); 
                 projectFolder.className = "projectFolderTitle";
                 projectFolder.id = project.projectName;
-                projectFolder.innerHTML = project.projectName;
+                projectFolder.innerHTML = "- " + project.projectName;
 
                 projectFolder.addEventListener("click", function(){
                     setFolder(project.projectName);
@@ -71,6 +71,7 @@ import { createSortDropDown } from './createSortDropDown';
          folderHeaderName.innerHTML = folderName;
         
          if (folderName != "Inbox"){
+             folderHeaderName.className = "folderHeaderNameEditable"
             folderHeaderName.addEventListener("click", function(){
                 createEditProjectNameInputField(folderName);
             })
@@ -118,6 +119,7 @@ import { createSortDropDown } from './createSortDropDown';
          folderDescription.innerHTML = getDescription();
         //event listener for folderDescription
         if (folder != "Inbox"){
+            folderDescription.className = "folderDescriptionEditable";
             folderDescription.addEventListener("click", function(){
                 createEditProjectDescriptionInputField(folderName, getDescription());
             })
@@ -295,13 +297,13 @@ import { createSortDropDown } from './createSortDropDown';
                     taskListingBox.appendChild(taskListingRightContainer);
 
                     if (taskPriority == "green"){
-                        taskListingBox.style.borderColor = "green";    
+                        taskListingBox.style.borderColor = "#49FF00";    
                     }
                     if (taskPriority == "orange"){
-                        taskListingBox.style.borderColor = "orange";    
+                        taskListingBox.style.borderColor = "#FF9300";    
                     }
                     if (taskPriority == "red"){
-                        taskListingBox.style.borderColor = "red"
+                        taskListingBox.style.borderColor = "#FF0000"
                     }
 
                     taskListing.appendChild(taskListingBox);
