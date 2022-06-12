@@ -21,10 +21,10 @@ import { createSortDropDown } from './createSortDropDown';
         projectArray.forEach(renderHeadings)
         function renderHeadings(project){
             if (project.projectName != "Inbox"){
-                let projectFolder = document.createElement("div"); 
+                let projectFolder = document.createElement("li"); 
                 projectFolder.className = "projectFolderTitle";
                 projectFolder.id = project.projectName;
-                projectFolder.innerHTML = "- " + project.projectName;
+                projectFolder.innerHTML = project.projectName;
 
                 projectFolder.addEventListener("click", function(){
                     setFolder(project.projectName);

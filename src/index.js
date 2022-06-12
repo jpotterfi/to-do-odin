@@ -37,9 +37,13 @@ if (localStorage.length < 1){
         return {type, projectName, projectDescription, position};
       } 
 
-    let project = projectFactory("project", "Inbox", "An inbox of tasks for all your projects.", localStorage.length)
+    let project = projectFactory("project", "Inbox", "An inbox of tasks for all your projects. To create a task for a specific project, first navigate to the chosen project by clicking its name at the top of the screen.", localStorage.length)
     project = JSON.stringify(project);
     localStorage.setItem("0", project);
+    project = projectFactory("project", "Example Project", "An example project. You can customize me by clicking my title and description.", localStorage.length)
+    project = JSON.stringify(project);
+    localStorage.setItem("1", project);
+    
 }
 
 //set inbox as initial project

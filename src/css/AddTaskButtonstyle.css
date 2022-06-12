@@ -26,6 +26,7 @@
 #addTaskButton:hover,
 #addTaskButton:focus {
     background: white;
+    transform: scale(1.05);
 }
 
 #addTaskButton:focus {
