@@ -9,7 +9,7 @@
     gap: 16px;
     padding-left: 20px;
     padding-right: 20px;
-    
+    font-family: "Roboto";
 }
 
 #folderHeader {
@@ -37,7 +37,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     border: 2px solid;
-    padding: 2px;
+    padding: 4px;
 }
 
 .taskListingLeftContainer, .taskListingRightContainer {
@@ -54,6 +54,8 @@
 }
 
 .taskListingIsCompleted {
+    background-image: url("./check-outline.svg");
+    background-size: cover;
     width: 25px;
     height: 25px;
     border-radius: 75%;
@@ -111,6 +113,13 @@
     gap: 4px;
     align-items: center;
 }
+
+#sortDropDown, .folderDropDown{
+    background-color: #0C090A;
+    color: white;
+}
+
+
 .taskListingFolder {
     order: 3;
 }
@@ -158,7 +167,6 @@
 
 .taskListingDelete:hover{
     cursor: pointer;
-    text-decoration: underline;
     
 }
 
@@ -171,3 +179,61 @@
     text-decoration: underline;
 }
 
+.taskListingDelete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    margin: 0;
+    text-decoration: none;
+    
+    color: white;
+    border-radius: 75%;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    min-width: 25px;
+    min-height: 25px;
+    height: 25px;
+    width: 25px;
+}
+
+.taskListingDelete:hover,
+.taskListingDelete:focus {
+    
+    transform: scale(1.25);
+    color: red;
+}
+
+.taskListingDelete:focus {
+    outline: 1px solid rgb(0, 0, 0);
+    outline-offset: -4px;
+}
+
+.taskListingDelete:active {
+    transform: scale(0.95);
+}
+
+.taskListingIsCompleted {
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.taskListingIsCompleted:hover,
+.taskListingIsCompleted:focus {
+    transform: scale(1.05);
+    background-color: white;
+}
+
+.taskListingIsCompleted:active {
+    transform: scale(0.95);
+}

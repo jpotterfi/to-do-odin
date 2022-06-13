@@ -44,6 +44,7 @@ table {
 html,body {
     width: 100%;
     height: 100%;
+    /*font-size: calc(1rem + 1vw);*/
     
 }
 
@@ -70,7 +71,7 @@ html,body {
     padding-left: 20px;
     padding-right: 20px;
     border-bottom: 1px white solid;
-    
+    font-family: "Roboto";
 }
 
 #logoBox{
@@ -82,6 +83,10 @@ html,body {
     background-size: 100%;
     height: 100px;
     width: 100px;
+}
+
+#logo:hover {
+    cursor: pointer;
 }
 
 #logoText {

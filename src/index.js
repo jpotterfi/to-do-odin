@@ -17,6 +17,10 @@ import { startOfToday } from 'date-fns'
 import { sortArray } from './javascript/sortArray';
 import { setSort } from './javascript/currentSort';
 
+let logo = document.getElementById("logo");
+logo.addEventListener("click", function(){
+location.reload();
+});
 
 let inboxFolder = document.getElementById("inboxHeader");
 inboxFolder.addEventListener("click", function(){

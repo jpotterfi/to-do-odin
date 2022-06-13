@@ -1,10 +1,12 @@
 #modalBox {
-    height: 20%;
-    width: 20%;
+    height: 30%;
+    width: 30%;
     min-width: fit-content;
-    max-width: fit-content;
     min-height: fit-content;
-    background-color: blue;
+    background-color: #0C090A;
+    border: 3px solid white;
+    border-radius: 8px;
+    color: white;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -13,12 +15,15 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 16px;
+    gap: 10px;
+    font-family: 'Roboto';
 }
 
 #projectDescriptionBox, #projectNameBox {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+    
 }
 
 #projectConfirmBox {
@@ -26,4 +31,118 @@
     flex-direction: row;
     align-self: center;
     gap: 8px;
+}
+#projectNameInput, #projectDescriptionInput{
+    background-color: #0C090A;
+	border: white 1px solid;
+	color: white;
+	outline: none;
+}
+
+#projectNameInput{
+    font-family: 'Roboto';
+}
+
+#projectDescriptionBox{
+    flex-grow: 1;
+}
+
+#projectDescriptionInput{
+    height: 100%;
+    width: 100%;
+    font-family: monospace;
+}
+
+.modal {
+
+    /* stuff we already covered */
+  
+    z-index: 1010;
+  
+  }
+  .modal-overlay {
+  
+    /* recommendation:
+       don't focus on the number "1000" here, but rather,
+       you should have a documented system for z-index and 
+       follow that system. This number should be pretty
+       high on the scale in that system.
+    */
+    z-index: 1000;
+  
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(12, 9, 10, .5);
+  }
+
+#projectConfirmButton {
+    border: none;
+    padding: 4px 8px;
+    margin: 0;
+    text-decoration: none;
+    background: white;
+    color: #0C090A;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+}
+
+#projectConfirmButton:hover,
+#projectConfirmButton:focus {
+    background: white;
+    transform: scale(1.05);
+}
+
+#projectConfirmButton:focus {
+    outline: 1px solid rgb(0, 0, 0);
+    outline-offset: -4px;
+}
+
+#projectConfirmButton:active {
+    transform: scale(0.95);
+}
+
+
+#projectDenyButton {
+    border: none;
+    padding: 4px 8px;
+    margin: 0;
+    text-decoration: none;
+    background: white;
+    color: #0C090A;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+}
+
+#projectDenyButton:hover,
+#projectDenyButton:focus {
+    background: white;
+    transform: scale(1.05);
+}
+
+#projectDenyButton:focus {
+    outline: 1px solid rgb(0, 0, 0);
+    outline-offset: -4px;
+}
+
+#projectDenyButton:active {
+    transform: scale(0.95);
 }

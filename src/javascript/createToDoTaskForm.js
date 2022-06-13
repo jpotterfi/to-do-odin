@@ -35,6 +35,7 @@ function createToDoTaskForm(){
     taskBox.appendChild(taskField);
 
     form.appendChild(taskBox);
+    
 
     ///task Box
 
@@ -213,6 +214,7 @@ function createToDoTaskForm(){
 
     let rightContent = document.getElementById("right-content");
     rightContent.appendChild(form);
+    taskInput.focus();
 }
 
 export {

@@ -1,9 +1,11 @@
-import { renderProjectHeadings } from "./renderProjects";
+import { renderProjectHeadings, renderProjectPage } from "./renderProjects";
+import { getFolder } from "./setFolder";
 import { updatePage } from "./updatePage";
 
 function createProjectModal() {
     let modalBox = document.createElement("div");
     modalBox.id = "modalBox";
+    modalBox.className = "modal"
 
     let projectNameBox = document.createElement("div");
     let projectNameHeading = document.createElement("div");
@@ -19,7 +21,7 @@ function createProjectModal() {
 
     let projectDescriptionBox = document.createElement("div");
     let projectDescriptionHeading = document.createElement("div");
-    let projectDescriptionInput = document.createElement("input");
+    let projectDescriptionInput = document.createElement("textarea");
     projectDescriptionBox.id = "projectDescriptionBox";
     projectDescriptionHeading.id = "projectDescriptionHeading";
     projectDescriptionInput.id = "projectDescriptionInput";
@@ -42,6 +44,7 @@ function createProjectModal() {
     //event listeners
     projectDenyButton.addEventListener("click", function(){
         modalBox.remove();
+        modalOverlay.remove()
     });
 
 
@@ -63,7 +66,9 @@ function createProjectModal() {
 
         localStorage.setItem(localStorage.length, project);
         modalBox.remove();
+        modalOverlay.remove()
         renderProjectHeadings();
+        renderProjectPage(getFolder());
         
     });
 
@@ -75,13 +80,17 @@ function createProjectModal() {
     projectConfirmBox.appendChild(projectConfirmButton);
     projectConfirmBox.appendChild(projectDenyButton);
 
-
     modalBox.append(projectNameBox);
     modalBox.append(projectDescriptionBox);
     modalBox.append(projectConfirmBox);
 
     let content = document.getElementById("content");
     content.append(modalBox);
+    let modalOverlay = document.createElement("div");
+    modalOverlay.className = "modal-overlay";
+
+
+    content.append(modalOverlay);
 
 } export {
     createProjectModal
