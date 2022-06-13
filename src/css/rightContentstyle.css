@@ -89,6 +89,7 @@
 
 #projectDelete{
     align-self: flex-start;
+    font-size: 20px;
 }
 
 #folderHeaderName {
@@ -243,7 +244,7 @@
 }
 
 #projectDelete{
-    color: red;
+    color: white;
     cursor: pointer;
 }
 
@@ -251,9 +252,11 @@
 #projectDelete:hover,
 #projectDelete:focus {
     cursor: pointer;
+    color: red;
     transform: scale(1.25);
 }
 
 #projectDelete:active {
+    color: red;
     transform: scale(0.95);
 }
