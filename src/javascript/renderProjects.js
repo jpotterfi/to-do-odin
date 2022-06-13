@@ -10,6 +10,7 @@ import { deleteFromLocalStorage } from './deleteFromLocalStorage';
 import { sortArray } from './sortArray';
 import { getSort, setSort } from './currentSort';
 import { createSortDropDown } from './createSortDropDown';
+import { createDeleteModal } from './createDeleteModal';
 
 
 
@@ -75,6 +76,7 @@ import { createSortDropDown } from './createSortDropDown';
             folderHeaderName.addEventListener("click", function(){
                 createEditProjectNameInputField(folderName);
             })
+            
          }
          
          /*
@@ -94,6 +96,18 @@ import { createSortDropDown } from './createSortDropDown';
          */
 
          folderHeaderContainer.appendChild(folderHeaderName);
+         if (folderName != "Inbox"){
+            let projectDelete = document.createElement("div");
+             projectDelete.innerText = "x";
+             projectDelete.id = "projectDelete"
+
+            projectDelete.addEventListener("click", function(){
+                createDeleteModal();
+            })
+
+
+             folderHeaderContainer.appendChild(projectDelete);
+         }
          //folderHeaderContainer.appendChild(timeHeaderContainer);
         
          folderBoxHeader.appendChild(folderHeaderContainer);

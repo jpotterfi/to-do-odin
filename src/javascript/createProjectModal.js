@@ -1,5 +1,5 @@
 import { renderProjectHeadings, renderProjectPage } from "./renderProjects";
-import { getFolder } from "./setFolder";
+import { getFolder, setFolder } from "./setFolder";
 import { updatePage } from "./updatePage";
 
 function createProjectModal() {
@@ -68,6 +68,7 @@ function createProjectModal() {
         modalBox.remove();
         modalOverlay.remove()
         renderProjectHeadings();
+        setFolder(projectNameData);
         renderProjectPage(getFolder());
         
     });

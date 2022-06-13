@@ -4,6 +4,7 @@ import './css/AddTaskButtonstyle.css'
 import './css/projectModal.css'
 import './css/rightContentstyle.css'
 import './css/editTaskListingstyle.css'
+import './css/deleteModalstyle.css'
 
 
 

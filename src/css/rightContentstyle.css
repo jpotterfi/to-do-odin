@@ -87,6 +87,10 @@
     align-items: center;
 }
 
+#projectDelete{
+    align-self: flex-start;
+}
+
 #folderHeaderName {
     font-family: 'Roboto';
     font-size: 50px;
@@ -235,5 +239,21 @@
 }
 
 .taskListingIsCompleted:active {
+    transform: scale(0.95);
+}
+
+#projectDelete{
+    color: red;
+    cursor: pointer;
+}
+
+
+#projectDelete:hover,
+#projectDelete:focus {
+    cursor: pointer;
+    transform: scale(1.25);
+}
+
+#projectDelete:active {
     transform: scale(0.95);
 }
