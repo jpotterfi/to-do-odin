@@ -14,7 +14,7 @@ function createProjectModal() {
     projectNameHeading.id = "projectNameHeading";
     projectNameInput.id = "projectNameInput";
 
-    projectNameHeading.innerHTML = "Project Name"
+    projectNameHeading.innerHTML = "Project Name:"
 
     projectNameBox.appendChild(projectNameHeading);
     projectNameBox.appendChild(projectNameInput);
@@ -26,7 +26,7 @@ function createProjectModal() {
     projectDescriptionHeading.id = "projectDescriptionHeading";
     projectDescriptionInput.id = "projectDescriptionInput";
 
-    projectDescriptionHeading.innerHTML = "Project Description";
+    projectDescriptionHeading.innerHTML = "Project Description:";
 
     projectDescriptionBox.appendChild(projectDescriptionHeading);
     projectDescriptionBox.appendChild(projectDescriptionInput);

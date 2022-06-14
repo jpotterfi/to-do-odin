@@ -4,13 +4,14 @@
 	justify-content: space-between;
 	align-items: center;
 	min-width: fit-content;
-	width: 99.5%;
+	width: 99.3%;
 	border: white 2px solid;
 	font-size: 20px;
 	color: white;
 	font-family: 'Roboto';
 	background-color: #0C090A;
 	min-height: fit-content;
+	padding: 1px;
 }
 
 .switch-field {
@@ -229,4 +230,60 @@
 
 #redButton:active {
     transform: scale(.95);
+}
+
+
+
+
+#confirmButton {
+    padding: 1rem 1rem;
+    margin: 0;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    max-width: 9px;
+    max-height: 9px;
+}
+
+#confirmButton:hover,
+#confirmButton:focus {
+    transform: scale(1.1);
+}
+
+#confirmButton:active {
+    transform: scale(0.95);
+}
+
+
+#denyButton {
+    padding: 1rem 1rem;
+    margin: 0;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    max-width: 9px;
+    max-height: 9px;
+}
+
+#denyButton:hover,
+#denyButton:focus {
+    transform: scale(1.05);
+}
+
+#denyButton:active {
+    transform: scale(0.95);
 }
